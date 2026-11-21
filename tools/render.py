@@ -48,45 +48,47 @@ def font(family, bold, size):
 
 # ---------------------------------------------------------------- layout data
 # tier: hero / medium / brief. Every string below is sourced from the brief.
+# Compound items are split into separate stories; no fact is invented and no
+# fact is moved to a day it did not happen on.
 HEROES = [
     dict(
         field="Conflict",
-        headline="Russian missiles hit Kyiv; two fall in Poland",
-        summary=("About 12 ballistic missiles and drones hit Kyiv overnight, "
-                 "killing at least 3. A Kh-101 fell in a field near Nowy "
-                 "Lipowiec; NATO called it a violation."),
-        place="Kyiv, Ukraine · Lublin, Poland",
+        headline="At least 3 killed as missiles hit Kyiv",
+        summary=("About 12 ballistic missiles and drones struck the Ukrainian "
+                 "capital overnight, killing at least 3 people."),
+        place="Kyiv, Ukraine",
         source="AP",
     ),
     dict(
         field="Science and AI",
         headline="Anthropic mathematician claims Riemann proof",
-        summary=("Levent Alpöge says six weeks with Claude yielded a proof of "
-                 "the Riemann hypothesis. The Lean version exceeds 250,000 "
-                 "lines; Tao says verification is some way off."),
-        place="Anthropic · a day after its market debut",
+        summary=("Levent Alpöge says six weeks working with Claude produced a "
+                 "proof of the Riemann hypothesis, a day after Anthropic's "
+                 "market debut."),
+        place="Anthropic",
         source="BBC · Nature · AFP",
     ),
     dict(
         field="Climate",
-        headline="COP31 closes in Antalya without the words fossil fuels",
-        summary=("The closing draft dropped every mention of fossil fuels and "
-                 "the $120bn adaptation figure. Protesters held \"Shame\" signs "
-                 "at the plenary; the final text was due at midnight."),
+        headline="COP31 closes without the words fossil fuels",
+        summary=("The closing draft at the Antalya talks dropped every mention "
+                 "of fossil fuels on the final day of the UN climate talks."),
         place="Antalya",
         source="AP",
     ),
 ]
 
 MEDIUM = [
+    dict(field="Conflict", headline="Two Russian missiles fall in Poland",
+         line="A Kh-101 hit a field near Nowy Lipowiec", place="Lublin, Poland"),
     dict(field="Labour", headline="Italy stops for a 24-hour general strike",
          line="About 100 squares march against the budget", place="Rome · Italy"),
     dict(field="Labour", headline="Portugal's public sector walks out",
-         line="Unions seek 15% and a €1,150 minimum wage", place="Portugal"),
+         line="Strike timed to the 2027 budget vote", place="Portugal"),
     dict(field="Shipping", headline="Tanker ablaze in the Strait of Hormuz",
          line="IRGC and UKMTO report fire off Khasab", place="Khasab, Oman"),
     dict(field="Conflict", headline="Saudi-led coalition strikes Yemen",
-         line="Ops kill or injure 193 Houthi fighters", place="Hodeidah · Sanaa · Taiz"),
+         line="Hodeidah, Sanaa, Saada and Taiz hit", place="Yemen"),
     dict(field="Security", headline="Iraq agrees joint ops with Kata'ib Hezbollah",
          line="Al-Zaidi: joint centre and troops deployed", place="Jurf al-Sakhar"),
     dict(field="Disaster", headline="30 dead as funeral boat capsizes",
@@ -94,42 +96,78 @@ MEDIUM = [
     dict(field="Seismic", headline="Magnitude 6.7 quake hits central Peru",
          line="Felt in Lima; no fatalities reported", place="30 km north-west of Junín"),
     dict(field="Rights", headline="UN court finds genocide in Myanmar",
-         line="Sanctions urged; China and Russia could veto", place="Myanmar · United Nations"),
+         line="Rights groups urge sanctions after the ruling", place="Myanmar · United Nations"),
     dict(field="Markets", headline="Seventh straight fall for Asia stocks",
          line="Nikkei -4.6%; Kospi below 5,000", place="Tokyo · Seoul"),
     dict(field="Weather", headline="Cyclone Akvan bears down on Odisha",
-         line="105,000 evacuated; landfall near Gopalpur", place="Odisha, India"),
+         line="Landfall near Gopalpur around noon IST", place="Odisha, India"),
     dict(field="Tech policy", headline="Trump threatens tax on AI data centres",
-         line="Senate bill speeds permits, charges energy", place="Washington"),
+         line="A tremendous tax if built abroad, he says", place="Washington"),
     dict(field="Diplomacy", headline="UK and EU rebuild post-Brexit ties",
          line="Trade and travel deals at a rare summit", place="London · Brussels"),
+    dict(field="Conflict", headline="Yemen ops kill or injure 193 Houthis",
+         line="Government forces in Al-Jawf, Marib, Taiz", place="Yemen"),
+    dict(field="Tech policy", headline="Senate passes data-centre permitting bill",
+         line="Faster reviews; centres to pay energy costs", place="Washington"),
+    dict(field="Markets", headline="Global stocks head for longest slide since 2023",
+         line="MSCI Asia-Pacific down 1.1% for a seventh day", place="World markets"),
 ]
 
 BRIEFS = [
-    ("Haiti / El Salvador", "Three prisons agreed for gang members"),
-    ("El Salvador", "Three soldiers killed as explosives detonate"),
-    ("Alaska", "DOJ moves to drop suit over Peltola's Senate win"),
-    ("Malaysia", "Anwar: air-force officers suspected of smuggling drugs"),
-    ("France", "De Villepin to run in the 2027 presidential election"),
-    ("Wellington", "NZ 317-6 v India: Phillips 118, Nicholls 146 not out"),
-    ("Turin", "ATP Finals group stage ends"),
-    ("Las Vegas", "Grand Prix washed out"),
-    ("Hong Kong", "India beat Malaysia at the Hong Kong Open"),
-    ("US", "FBI: sextortion of minors headed for worst year on record"),
-    ("Cincinnati", "Fiona the hippo dies after eating a visitor's hat"),
-    ("WWE", "Dwayne Johnson announces his return"),
-    ("US Capitol", "76-foot Engelmann spruce arrives after 2,000 miles"),
-    ("Interpol", "Carback II: 680+ arrests, nearly 2,400 vehicles seized"),
-    ("Los Angeles", "Magnitude 4.2 quake near Commerce"),
-    ("US", "Router outage ground stop disrupts 18,000+ flights"),
-    ("Rome", "Trajan's Ulpia library ruins reopen after restoration"),
-    ("Antalya", "About 50 protesters demonstrate at the closing plenary"),
-    ("Portugal", "Zero VAT on basic food basket confirmed for Q1 2027"),
-    ("Sines", "Magnitude 3.4 quake strikes 55 km offshore"),
-    ("Taiz", "More than 140 civilians killed since August, BBC reports"),
-    ("Poland", "11-country drill for a postwar Ukraine mission"),
-    ("Poland", "Air-raid alerts issued in Lublin and Podkarpackie"),
-    ("Europe", "Workers and students protest wages and living costs"),
+    ("Kyiv", "Bridges were crippled and power cut in the overnight attack"),
+    ("Lublin", "Air-raid alerts issued in Lublin and Podkarpackie after the falls"),
+    ("Nowy Lipowiec", "The Kh-101 fell about 60 miles from the Coalition drill"),
+    ("Warsaw", "The prime minister called it likely an intentional provocation"),
+    ("Poland", "Troops from 11 countries drilled for a postwar Ukraine mission"),
+    ("NATO", "Called the fall of Russian missiles in Poland a violation"),
+    ("Anthropic", "Alpöge says the generalized Riemann hypothesis is proved too"),
+    ("Anthropic", "A four-page sketch of the proof was released on Friday"),
+    ("Anthropic", "The Lean version runs to more than 250,000 lines"),
+    ("Andrew Granville", "Called the write-up of the claimed proof garbled"),
+    ("Terence Tao", "Said verification of the proof is still some way off"),
+    ("Maynard", "Suspects it is correct; checking the Lean will take time"),
+    ("Antalya", "The closing draft dropped the $120bn adaptation figure"),
+    ("Antalya", "About 50 protesters held Shame signs at the closing plenary"),
+    ("Antalya", "Leaders called the climate process hypocritical and futile"),
+    ("Antalya", "The final text of the talks was due at midnight"),
+    ("Rome", "Maurizio Landini closed the march from Piazza Vittorio Emanuele II"),
+    ("Italy", "CGIL's strike stopped transport, schools and hospitals"),
+    ("Italy", "Strikers demanded wages, pensions, healthcare and housing"),
+    ("Italy", "Marchers called for yes to peace, no to rearmament"),
+    ("Europe", "Workers and students protested stagnant wages and living costs"),
+    ("Lisbon", "Unions demand at least 15%, at least €150 a month, from January"),
+    ("Lisbon", "A €1,150 minimum public-sector wage is sought from Jan 2027"),
+    ("Portugal", "Rubbish collection stopped in several municipalities"),
+    ("Portugal", "Schools closed and hospitals ran on minimum services"),
+    ("Portugal", "Parliament confirmed zero VAT on the basic food basket for Q1"),
+    ("Sines", "A magnitude 3.4 quake struck offshore, 55 km to the west"),
+    ("Hodeidah", "The coalition said it was targeting weapons smuggling"),
+    ("Taiz", "More than 140 civilians killed since August, the BBC reports"),
+    ("Baghdad", "Al-Zaidi had threatened to send forces into the stronghold"),
+    ("Jurf al-Sakhar", "Government and Kata'ib Hezbollah troops to station jointly"),
+    ("El Salvador", "Three soldiers killed, one injured, as explosives detonated"),
+    ("Haiti · El Salvador", "Three new prisons agreed to hold Haitian gang members"),
+    ("Myanmar", "Dismissed the genocide ruling as unfair"),
+    ("United Nations", "China and Russia could veto any Security Council action"),
+    ("Odisha", "About 105,000 evacuated; some reports say 300,000 in all"),
+    ("Odisha", "Winds of 90–100 km/h, gusting higher, forecast at landfall"),
+    ("Odisha", "More than 400 rescue teams deployed; dozens of trains cancelled"),
+    ("Alaska", "The DOJ moved to drop its suit over Mary Peltola's Senate win"),
+    ("Malaysia", "Anwar: air-force officers, pilots included, suspected of drugs"),
+    ("France", "Dominique de Villepin will run in the 2027 presidential election"),
+    ("Wellington", "New Zealand 317-6 v India: Phillips 118, Nicholls 146 not out"),
+    ("Turin", "The ATP Finals group stage ended"),
+    ("Las Vegas", "The Grand Prix was washed out"),
+    ("Hong Kong", "India beat Malaysia in the Hong Kong Open"),
+    ("US", "FBI warned of a surge in sextortion of minors, a record year"),
+    ("Cincinnati", "Fiona the hippo died days after eating a visitor's hat"),
+    ("WWE", "Dwayne Johnson announced his return"),
+    ("US Capitol", "A 76-foot Engelmann spruce arrived after a 2,000-mile journey"),
+    ("Interpol", "Carback II: 680+ arrests, almost 2,400 vehicles seized"),
+    ("Los Angeles", "A magnitude 4.2 earthquake near Commerce shook the city"),
+    ("US", "An FAA ground stop from a router outage hit 18,000+ flights"),
+    ("US", "The root cause of the router outage is due this week"),
+    ("Rome", "The ruins of Trajan's Ulpia library opened after restoration"),
 ]
 
 NUMBERS = [
@@ -157,9 +195,26 @@ class Page:
         self.d = ImageDraw.Draw(self.img)
         self.manifest = []      # every drawn text run: story, cell, bbox, text
         self.errors = []
+        self.brief_size = 9
+        self.brief_lead = 12
+        self.briefs_top = 0
+        self.medium_bottom = 0
 
     def rule(self, x0, y0, x1, y1, fill=RULE, width=1):
         self.d.rectangle([x0, y0, x1, y1], fill=fill)
+
+    def bar(self, story, y, h, label, right=None):
+        """Solid ink section flag with reversed (paper) text."""
+        cell = (M, y, W - M, y + h)
+        self.d.rectangle([M, y, W - M, y + h], fill=INK)
+        f = font("sans", True, 11)
+        self.text(story, cell, M + 8, y + (h - 11) / 2 - 1, label, f, PAPER)
+        if right:
+            fr = font("sans", False, 10)
+            rw = fr.getlength(right)
+            self.text(story, cell, W - M - 8 - rw, y + (h - 10) / 2 - 1,
+                      right, fr, PAPER)
+        return y + h
 
     def _record(self, story, cell, bbox, text, size):
         x0, y0, x1, y1 = bbox
@@ -224,31 +279,53 @@ class Page:
         return f.size
 
 
+# ---------------------------------------------------------------- briefs grid
+BCOLS = 6
+BGAP = 12
+BCW = (CW - (BCOLS - 1) * BGAP) / BCOLS
+BLEAD = 12          # 11-12 px leading
+BMAXLINES = 3
+
+
+def brief_lines(size):
+    """Wrap every brief at the given serif-bold size; return list of line-lists."""
+    f = font("serif", True, size)
+    pg = Page()
+    out = [pg.wrap(place + " — " + txt, f, BCW - 4) for place, txt in BRIEFS]
+    return out
+
+
+def choose_brief_size():
+    for size in (9, 8):
+        ls = brief_lines(size)
+        if all(len(l) <= BMAXLINES for l in ls):
+            return size, ls
+    return 8, brief_lines(8)
+
+
 # ---------------------------------------------------------------- page build
 def build():
     p = Page()
-    d = p.d
 
     # ---- masthead
-    mast_cell = (M, 10, W - M, 118)
-    f = font("serif", True, 37)
-    p.text("masthead", mast_cell, W / 2, 14, MASTHEAD, f, INK, anchor="mt")
-    p.rule(M, 62, W - M, 63, fill=INK)
-    p.rule(M, 66, W - M, 66, fill=RULE)
-    f = font("serif", True, 21)
-    p.text("date", mast_cell, W / 2, 72, DATE_LINE, f, ACCENT, anchor="mt")
+    mast_cell = (M, 8, W - M, 106)
+    f = font("serif", True, 38)
+    p.text("masthead", mast_cell, W / 2, 12, MASTHEAD, f, INK, anchor="mt")
+    p.rule(M, 58, W - M, 59, fill=INK)          # thin rule under the name
+    f = font("serif", True, 22)
+    p.text("date", mast_cell, W / 2, 64, DATE_LINE, f, ACCENT, anchor="mt")
     edition = f"World edition · {N_STORIES} stories · One page, the day's wires"
     f = font("sans", False, 10)
     if f.getlength(edition) > CW:
         f = font("sans", False, 9)
     ew = f.getlength(edition)
-    p.text("edition", mast_cell, (W - ew) / 2, 100, edition, f, SECOND)
-    p.rule(M, 117, W - M, 117, fill=RULE)
+    p.text("edition", mast_cell, (W - ew) / 2, 90, edition, f, SECOND)
+    p.rule(M, 104, W - M, 104, fill=RULE)
 
     # ---- heroes: 3 columns
-    hy0, hy1 = 123, 331
+    hy0, hy1 = 112, 302
     gap = 18
-    colw = (CW - 2 * gap) // 3          # 314
+    colw = (CW - 2 * gap) // 3
     widths = [colw, colw, CW - 2 * gap - 2 * colw]
     xs = [M, M + widths[0] + gap, M + widths[0] + gap + widths[1] + gap]
     for i, h in enumerate(HEROES):
@@ -258,109 +335,114 @@ def build():
         if i:
             p.rule(x0 - gap // 2, hy0 + 2, x0 - gap // 2, hy1 - 2)
         y = hy0 + 2
-        tx = x0 + 1  # guard against 1px negative left side bearings
+        tx = x0 + 1
         y = p.para(sid, cell, tx, y, h["field"], w - 1, "sans", True, 11, 10, 1,
                    ACCENT, lh=14)[0]
         y += 4
-        y, _ = p.para(sid, cell, tx, y, h["headline"], w - 1, "serif", True, 26,
-                      22, 3, INK, lh=31)
+        y, _ = p.para(sid, cell, tx, y, h["headline"], w - 1, "serif", True, 25,
+                      22, 3, INK, lh=29)
         y += 7
         y, _ = p.para(sid, cell, tx, y, h["summary"], w - 1, "sans", False, 12,
-                      10, 3, INK, lh=16)
+                      10, 3, INK, lh=15)
         y += 8
         y = p.para(sid, cell, tx, y, h["place"], w - 1, "sans", True, 10, 9, 1,
                    SECOND, lh=13)[0]
         y += 2
         p.para(sid, cell, tx, y, "Source: " + h["source"], w - 1, "sans", False,
                9, 8, 1, SECOND, lh=12)
-    p.rule(M, hy1 + 3, W - M, hy1 + 3, fill=RULE)
+    p.rule(M, 305, W - M, 305, fill=RULE)
 
-    # ---- by the numbers
-    ny0, ny1 = 340, 408
-    num_cell = (M, ny0, W - M, ny1)
-    p.text("numbers", num_cell, M, ny0 + 3, "By the numbers",
-           font("sans", True, 11), SECOND)
+    # ---- by the numbers (solid flag + figures)
+    ny = p.bar("numbers-flag", 310, 14, "By the numbers")
+    ny0, ny1 = ny + 4, 380
     n = len(NUMBERS)
     seg = CW / n
     for i, (value, label) in enumerate(NUMBERS):
         x0 = M + i * seg
-        cell = (x0, ny0 + 17, x0 + seg - 6, ny1)
+        cell = (x0, ny0, x0 + seg - 6, ny1)
         if i:
-            p.rule(int(x0) - 3, ny0 + 18, int(x0) - 3, ny1 - 4)
-        p.one_line(f"num{i+1}", cell, x0, ny0 + 18, value, seg - 10,
+            p.rule(int(x0) - 3, ny0 + 2, int(x0) - 3, ny1 - 2)
+        p.one_line(f"num{i+1}", cell, x0, ny0 + 2, value, seg - 10,
                    "serif", True, 21, 16, ACCENT)
-        p.para(f"num{i+1}", cell, x0, ny0 + 44, label, seg - 10, "sans",
+        p.para(f"num{i+1}", cell, x0, ny0 + 28, label, seg - 10, "sans",
                False, 9, 8, 2, INK, lh=11)
-    p.rule(M, ny1 + 3, W - M, ny1 + 3, fill=RULE)
+    p.rule(M, 382, W - M, 382, fill=RULE)
 
-    # ---- medium cards: 4 x 3 grid
-    my0, my1 = 417, 737
-    gx, gy = 14, 6
-    cols = 4
-    rows = 3
+    # ---- medium cards: 4 x 4 grid (field + headline + one line)
+    my0 = 386
+    gx, gy = 12, 6
+    cols, rows = 4, 4
     cw = (CW - (cols - 1) * gx) / cols
-    rh = (my1 - my0 - (rows - 1) * gy) / rows
+    rh = 62
     for idx, m in enumerate(MEDIUM):
         r, c = divmod(idx, cols)
         x0 = M + c * (cw + gx)
         y0 = my0 + r * (rh + gy)
         cell = (x0, y0, x0 + cw, y0 + rh)
         sid = f"med{idx+1}"
-        d.rectangle([x0, y0, x0 + cw, y0 + rh], outline=RULE, width=1)
-        pad = 8
+        p.d.rectangle([x0, y0, x0 + cw, y0 + rh], outline=RULE, width=1)
+        pad = 6
         iw = cw - 2 * pad
-        y = y0 + 8
-        p.one_line(sid, cell, x0 + pad, y, m["field"], iw, "sans", True, 9,
+        p.one_line(sid, cell, x0 + pad, y0 + 4, m["field"], iw, "sans", True, 9,
                    8, SECOND)
-        y += 14
-        y, _ = p.para(sid, cell, x0 + pad, y, m["headline"], iw, "serif",
-                      True, 15, 13, 2, INK, lh=18)
-        y += 5
-        p.one_line(sid, cell, x0 + pad, y, m["line"], iw, "sans", False, 10,
-                   9, INK)
-        y += 15
-        p.one_line(sid, cell, x0 + pad, y, m["place"], iw, "sans", False, 9,
-                   8, SECOND)
-    p.rule(M, my1 + 3, W - M, my1 + 3, fill=RULE)
+        p.para(sid, cell, x0 + pad, y0 + 15, m["headline"], iw, "serif",
+               True, 14, 13, 2, INK, lh=15)
+        p.one_line(sid, cell, x0 + pad, y0 + 47, m["line"], iw, "sans", False,
+                   10, 9, INK)
+    medium_bottom = my0 + rows * rh + (rows - 1) * gy
+    p.rule(M, medium_bottom + 3, W - M, medium_bottom + 3, fill=RULE)
 
-    # ---- briefs: 3 columns x 8 rows, one line each
-    by0, by1 = 746, 1001
-    p.text("briefs-header", (M, by0, W - M, by0 + 16), M, by0 + 1, "Briefs",
-           font("sans", True, 11), SECOND)
-    p.rule(M, by0 + 16, W - M, by0 + 16, fill=RULE)
-    bgap = 16
-    bcols = 3
-    bcw = (CW - (bcols - 1) * bgap) / bcols
-    top = by0 + 20
-    rowh = (by1 - top) / 8
-    for i, (place, txt) in enumerate(BRIEFS):
-        c, r = divmod(i, 8)
-        x0 = M + c * (bcw + bgap)
-        y0 = top + r * rowh
-        cell = (x0, y0, x0 + bcw, y0 + rowh)
-        sid = f"brief{i+1}"
-        if c:
-            p.rule(int(x0 - bgap / 2), int(top), int(x0 - bgap / 2), int(by1 - 2))
-        if r:
-            p.rule(x0 + 1, y0, x0 + bcw - 1, y0, fill=RULE)
-        # place prefix (bold, secondary) + em dash + text (ink), one line
-        size = 10
-        while size > 8:
-            fb = font("sans", True, size)
-            fr = font("sans", False, size)
-            prefix = place + " — "
-            if fb.getlength(prefix) + fr.getlength(txt) <= bcw - 4:
+    # ---- briefs: 6 columns, row-major bands, aligned baselines, fill to bottom
+    by1 = 1002                                   # bottom margin of the block
+    header_h = 14
+    chosen = None
+    for bsize, lead in ((9, 12), (9, 11), (8, 12), (8, 11)):
+        blines = brief_lines(bsize)
+        if not all(len(l) <= BMAXLINES for l in blines):
+            continue
+        nrows = (len(BRIEFS) + BCOLS - 1) // BCOLS
+        row_heights = [max(len(c) for c in blines[r * BCOLS:(r + 1) * BCOLS])
+                       * lead for r in range(nrows)]
+        rows_h = sum(row_heights)
+        top = by1 - (header_h + 3 + rows_h)
+        if top >= medium_bottom + 6:
+            chosen = (bsize, lead, blines, nrows, row_heights, rows_h, top)
+            break
+    if chosen is None:
+        p.errors.append("BRIEFS-FIT: no size/leading fits above the medium grid")
+        chosen = (8, 11, brief_lines(8), 1, [0], 0, by1)
+    bsize, lead, blines, nrows, row_heights, rows_h, briefs_top = chosen
+    fb = font("serif", True, bsize)
+    p.bar("briefs-flag", briefs_top, header_h, "Briefs",
+          right=f"{len(BRIEFS)} one-line stories")
+    top = briefs_top + header_h + 3
+    for c in range(1, BCOLS):                    # vertical rules between columns
+        x = M + c * (BCW + BGAP) - BGAP / 2
+        p.rule(int(x), top, int(x), by1 - 1)
+    y = top
+    for r in range(nrows):
+        rh = row_heights[r]
+        for c in range(BCOLS):
+            i = r * BCOLS + c
+            if i >= len(BRIEFS):
                 break
-            size -= 1
-        fb = font("sans", True, size)
-        fr = font("sans", False, size)
-        prefix = place + " — "
-        total = fb.getlength(prefix) + fr.getlength(txt)
-        if total > bcw - 4 + 0.5:
-            p.errors.append(f"BRIEF-OVERFLOW {sid}: {prefix+txt!r} at {size}px")
-        ty = y0 + (rowh - size) / 2 - 1
-        p.text(sid, cell, x0 + 2, ty, prefix, fb, SECOND)
-        p.text(sid, cell, x0 + 2 + fb.getlength(prefix), ty, txt, fr, INK)
+            x0 = M + c * (BCW + BGAP)
+            cell = (x0, y, x0 + BCW, y + rh)
+            sid = f"brief{i+1}"
+            place, txt = BRIEFS[i]
+            prefix = place + " — "
+            for k, ln in enumerate(blines[i]):
+                ly = y + k * lead
+                if k == 0 and ln.startswith(prefix):
+                    p.text(sid, cell, x0 + 2, ly, prefix, fb, SECOND)
+                    p.text(sid, cell, x0 + 2 + fb.getlength(prefix), ly,
+                           ln[len(prefix):], fb, INK)
+                else:
+                    p.text(sid, cell, x0 + 2, ly, ln, fb, INK)
+        p.rule(M, y + rh - 2, W - M, y + rh - 2, fill=SECOND)
+        y += rh
+    if y != by1:
+        p.errors.append(f"BRIEFS-BOTTOM: block ends {y}, expected {by1}")
 
     # ---- footer
     p.rule(M, 1005, W - M, 1005, fill=INK)
@@ -372,6 +454,10 @@ def build():
         fw = f.getlength(FOOTER)
     p.text("footer", foot_cell, (W - fw) / 2, 1009, FOOTER, f, SECOND)
 
+    p.brief_size = bsize
+    p.brief_lead = lead
+    p.briefs_top = briefs_top
+    p.medium_bottom = medium_bottom
     return p
 
 
@@ -389,6 +475,8 @@ def main():
           f"({size/1048576:.3f} MiB)")
     print(f"stories: {len(HEROES)} heroes + {len(MEDIUM)} medium + "
           f"{len(BRIEFS)} briefs = {N_STORIES}")
+    print(f"briefs: {p.brief_size}px serif bold, 6 cols, leading {p.brief_lead}, "
+          f"top={p.briefs_top}, medium_bottom={p.medium_bottom}")
     print(f"text runs drawn: {len(p.manifest)}; all boxes asserted inside cells")
     if "--text" in sys.argv:
         print("\n--- page text ---")
