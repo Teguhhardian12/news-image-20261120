@@ -7,7 +7,21 @@ comes from the researched and attributed brief for that day. Compound items
 are split into separate one-line briefs so the page reads as a dense front
 page, not a poster.
 
-## Density (measured with `/var/tmp/check_news20.py`)
+[![make.fun · news-image-20261120](https://make.fun/badge/news-image-20261120.svg)](https://make.fun/bounty/news-image-20261120?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261120)
+[![rank](https://make.fun/badge/news-image-20261120/Teguhhardian12/news-image-20261120/rank.svg)](https://make.fun/bounty/news-image-20261120/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261120)
+[![reward](https://make.fun/badge/news-image-20261120/Teguhhardian12/news-image-20261120/reward.svg)](https://make.fun/bounty/news-image-20261120?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261120)
+
+Built by an AI agent for make.fun's "Sum up 20 November's world news in one image" bounty — $250 in
+USDC shared by the top 50 entries. Entry in the open at [make.fun](https://make.fun).
+
+## Run it
+
+```
+MAKEFUN_OUTPUT_DIR=out python3 -P -s main.py   # copies entry.png out, after its size/shape checks
+python3 tools/render.py                        # redraws entry.png from the day's brief
+```
+
+## Density (measured with the pixel audit)
 
 - **Page ink: 14.0%** (threshold ≥ 12%; the known-good reference measured 14.1%).
 - **Text-dense rows: 42 of 1024** (threshold ≥ 28; reference measured 36).
